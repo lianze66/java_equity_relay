@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.durker.bean.SysUser;
 import com.durker.mapper.SysUserMapper;
@@ -21,7 +22,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public Map<String, String> login(String loginName, String password) {
         Map<String, String> map = new HashMap<>();
-        SysUser sysUser = baseMapper.getByLoginName(loginName);
+
+        QueryWrapper<SysUser> query = new QueryWrapper<>();
+        query.eq("login_name", loginName);
+        SysUser sysUser = baseMapper.selectOne(query);
+
         if (sysUser != null) {
             if (sysUser.getPassword().equals(password)) {
                 String token = JWT.create().withAudience(sysUser.getId().toString()).sign(Algorithm.HMAC256(sysUser.getPassword()));
