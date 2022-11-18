@@ -109,13 +109,13 @@
     </dependencyManagement>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <executable>true</executable>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>com.durker.EquityRelayApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
