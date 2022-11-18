@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Api(tags = "公告信息接口")
@@ -24,6 +23,12 @@ public class NoticeInfoController {
     @GetMapping("list")
     public List<NoticeInfo> queryList() {
         return noticeInfoService.list();
+    }
+
+    @ApiOperation("保存")
+    @PostMapping("insert")
+    public void insert(@RequestBody NoticeInfo noticeInfo) {
+        noticeInfoService.save(noticeInfo);
     }
 
     @ApiOperation("更新")
