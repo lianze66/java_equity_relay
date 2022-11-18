@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>java_equity_relay</name>
     <description>java_equity_relay</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
