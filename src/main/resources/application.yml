@@ -48,7 +48,7 @@ mybatis-plus:
 swagger:
   authorization:
     type: None
-  title: 权益接龙系统
+  title: 守护权益接龙系统
   description: 系统平台功能，包括首页、接龙、公告、我的等功能。
   version: v1.0
   contact:
