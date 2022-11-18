@@ -38,7 +38,7 @@ public class DruidConfig {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         /* 这些参数可以在 com.alibaba.druid.support.http.StatViewServlet 的父类 com.alibaba.druid.support.http.ResourceServlet 中找到 */
 
-        Map<String, String> initParams = new HashMap<>();
+        Map<String, String> initParams = new HashMap<String, String>();
         initParams.put("loginUsername", "admin");
         initParams.put("loginPassword", "123456");
         /* 默认就是允许所有访问 */
@@ -54,7 +54,7 @@ public class DruidConfig {
      */
     @Bean
     public FilterRegistrationBean webStatFilter() {
-        Map<String, String> initParams = new HashMap<>();
+        Map<String, String> initParams = new HashMap<String, String>();
         initParams.put("exclusions", "*.js,*.css,/druid/*");
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
