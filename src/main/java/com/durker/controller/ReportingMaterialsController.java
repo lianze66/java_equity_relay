@@ -17,10 +17,22 @@ public class ReportingMaterialsController {
     @Autowired
     private IReportingMaterialsService reportingMaterialsService;
 
-    @ApiOperation("列表")
+    @ApiOperation("全部数据列表")
     @GetMapping("list")
     public List<ReportingMaterials> queryList() {
         return reportingMaterialsService.list();
+    }
+
+    @ApiOperation("审核通过列表")
+    @GetMapping("showList")
+    public List<ReportingMaterials> showList() {
+        return reportingMaterialsService.showList();
+    }
+
+    @ApiOperation("个人列表")
+    @GetMapping("ownList/{token}")
+    public List<ReportingMaterials> ownList(@PathVariable String token) {
+        return reportingMaterialsService.ownList(token);
     }
 
     @ApiOperation("保存")

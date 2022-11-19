@@ -1,5 +1,6 @@
 package com.durker.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.durker.bean.FileInfo;
@@ -9,6 +10,7 @@ import com.durker.mapper.ReportingMaterialsMapper;
 import com.durker.service.IFileInfoService;
 import com.durker.service.IReportingMaterialsFileService;
 import com.durker.service.IReportingMaterialsService;
+import com.durker.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
 
     @Autowired
     private IFileInfoService fileInfoService;
+
+    @Autowired
+    private ISysUserService sysUserService;
 
     @Override
     public boolean save(ReportingMaterials reportingMaterials) {
@@ -62,5 +67,20 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
                 reportingMaterialsFileService.save(reportingMaterialsFile);
             }
         }
+    }
+
+    @Override
+    public List<ReportingMaterials> showList() {
+        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
+        query.eq("is_common", "Y");
+        query.eq("is_checked", "Y");
+        return baseMapper.selectList(query);
+    }
+
+    @Override
+    public List<ReportingMaterials> ownList(String token) {
+        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
+        query.eq("sys_user_id", sysUserService.getUserInfo(token).getId());
+        return baseMapper.selectList(query);
     }
 }
