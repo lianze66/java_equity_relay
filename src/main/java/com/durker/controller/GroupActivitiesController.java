@@ -36,14 +36,14 @@ public class GroupActivitiesController {
 
     @ApiOperation("保存")
     @PostMapping("insert")
-    public void insert(@RequestBody GroupActivities groupActivities) {
-        groupActivitiesService.save(groupActivities);
+    public boolean insert(@RequestBody GroupActivities groupActivities) {
+        return groupActivitiesService.save(groupActivities);
     }
 
     @ApiOperation("更新")
     @PutMapping("update")
-    public void update(@RequestBody GroupActivities groupActivities) {
-        groupActivitiesService.updateById(groupActivities);
+    public boolean update(@RequestBody GroupActivities groupActivities) {
+        return groupActivitiesService.updateById(groupActivities);
     }
 
     @ApiOperation("报名")

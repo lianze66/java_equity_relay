@@ -57,5 +57,5 @@ swagger:
   exclude-path: /error/**
 
 file:
-  server: https://yzyuu.com/files/
-  uploadPath: /web/rsd_website/files/  #服务器上传路径
+  server: https://test.dg.ebfkc.com/relay/
+  uploadPath: /website/equity_relay/  #服务器上传路径

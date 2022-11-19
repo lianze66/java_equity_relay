@@ -27,21 +27,21 @@ public class NoticeInfoController {
 
     @ApiOperation("保存")
     @PostMapping("insert")
-    public void insert(@RequestBody NoticeInfo noticeInfo) {
-        noticeInfoService.save(noticeInfo);
+    public boolean insert(@RequestBody NoticeInfo noticeInfo) {
+        return noticeInfoService.save(noticeInfo);
     }
 
     @ApiOperation("更新")
     @PutMapping("update")
-    public void update(@RequestBody NoticeInfo noticeInfo) {
-        noticeInfoService.updateById(noticeInfo);
+    public boolean update(@RequestBody NoticeInfo noticeInfo) {
+        return noticeInfoService.updateById(noticeInfo);
     }
 
     @ApiOperation("删除")
     @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键"))
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
-        noticeInfoService.removeById(id);
+    public boolean delete(@PathVariable Integer id) {
+        return noticeInfoService.removeById(id);
     }
 
     @ApiOperation("详情")

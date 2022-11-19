@@ -15,7 +15,7 @@ public class FileProcessingController {
     @Autowired
     private IFileProcessingService fileProcessingService;
 
-    @ApiOperation(value = "上传（自定义路径）", notes = "文件上传接口，单个文件最大支持100MB。")
+    @ApiOperation(value = "上传", notes = "文件上传接口，单个文件最大支持100MB。")
     @RequestMapping(value = "uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestPart(value = "file") MultipartFile file, @RequestParam String folder) throws Exception {
         return fileProcessingService.upload(file, folder);

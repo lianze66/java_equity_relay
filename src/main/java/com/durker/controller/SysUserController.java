@@ -29,15 +29,15 @@ public class SysUserController {
 
     @ApiOperation("更新")
     @PutMapping("update")
-    public void update(@RequestBody SysUser sysUser) {
-        sysUserService.updateById(sysUser);
+    public boolean update(@RequestBody SysUser sysUser) {
+        return sysUserService.updateById(sysUser);
     }
 
     @ApiOperation("删除")
     @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "用户主键"))
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
-        sysUserService.removeById(id);
+    public boolean delete(@PathVariable Integer id) {
+        return sysUserService.removeById(id);
     }
 
     @ApiOperation("详情")
