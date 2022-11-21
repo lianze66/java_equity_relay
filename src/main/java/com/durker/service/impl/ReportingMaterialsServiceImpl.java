@@ -13,8 +13,7 @@ import com.durker.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterialsMapper, ReportingMaterials> implements IReportingMaterialsService {
@@ -69,10 +68,36 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     }
 
     @Override
+    public List<Map<String, String>> statusList() {
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("id", "1");
+        map1.put("name", "私有");
+
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("id", "2");
+        map2.put("name", "申请公开");
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.put("id", "3");
+        map3.put("name", "审核通过");
+
+        Map<String, String> map4 = new HashMap<>();
+        map4.put("id", "4");
+        map4.put("name", "审核不通过");
+
+        list.add(map1);
+        list.add(map2);
+        list.add(map3);
+        list.add(map4);
+
+        return list;
+    }
+
+    @Override
     public List<ReportingMaterials> showList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
-        query.eq("is_common", "Y");
-        query.eq("is_checked", "Y");
+        query.eq("status", "审核通过");
         return baseMapper.selectList(query);
     }
 

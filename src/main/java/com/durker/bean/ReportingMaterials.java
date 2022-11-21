@@ -27,11 +27,8 @@ public class ReportingMaterials {
     @ApiModelProperty("简短描述")
     private String shortDesc;
 
-    @ApiModelProperty("是否公开")
-    private String isCommon;
-
-    @ApiModelProperty("是否审核通过")
-    private String isChecked;
+    @ApiModelProperty("状态")
+    private String status;
 
     @ApiModelProperty("系统用户ID")
     private Integer sysUserId;

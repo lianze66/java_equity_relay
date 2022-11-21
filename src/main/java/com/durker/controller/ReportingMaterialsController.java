@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "报案材料接口")
 @RequestMapping("reportingMaterials")
@@ -51,5 +52,11 @@ public class ReportingMaterialsController {
     @GetMapping("{id}")
     public ReportingMaterials detail(@PathVariable Integer id) {
         return reportingMaterialsService.getById(id);
+    }
+
+    @ApiOperation("状态列表")
+    @GetMapping("statusList")
+    public List<Map<String, String>> statusList() {
+        return reportingMaterialsService.statusList();
     }
 }
