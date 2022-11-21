@@ -29,8 +29,11 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
 
     @Override
     public boolean save(ReportingMaterials reportingMaterials) {
-        materialsAndFileShip(reportingMaterials);
-        return super.save(reportingMaterials);
+        boolean save = super.save(reportingMaterials);
+        if (save) {
+            materialsAndFileShip(reportingMaterials);
+        }
+        return save;
     }
 
     @Override
