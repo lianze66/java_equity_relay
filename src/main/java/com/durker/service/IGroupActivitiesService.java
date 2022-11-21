@@ -13,4 +13,12 @@ public interface IGroupActivitiesService extends IService<GroupActivities> {
      * @return
      */
     List<GroupActivities> activeList();
+
+    /**
+     * 状态列表
+     *
+     * @return
+     */
+    List<String> statusList();
+
 }

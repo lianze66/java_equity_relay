@@ -15,6 +15,10 @@ import java.util.Date;
 @TableName("bu_group_activities")
 public class GroupActivities {
 
+    public enum column {
+        MEETING_TIME, STATUS
+    }
+
     @ApiModelProperty("主键")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -35,7 +39,7 @@ public class GroupActivities {
     private String remind;
 
     @ApiModelProperty("状态")
-    private String status;
+    private String status; // 未开始、进行中、已取消、已结束
 
     @ApiModelProperty("发起人ID")
     private Integer sponsorId;

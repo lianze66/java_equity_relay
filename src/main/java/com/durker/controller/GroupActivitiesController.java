@@ -28,7 +28,7 @@ public class GroupActivitiesController {
         return groupActivitiesService.list();
     }
 
-    @ApiOperation("正在运行的活动")
+    @ApiOperation("正在“运行中”的列表")
     @GetMapping("activeList")
     public List<GroupActivities> activeList() {
         return groupActivitiesService.activeList();
@@ -56,5 +56,11 @@ public class GroupActivitiesController {
     @GetMapping("{id}")
     public GroupActivities detail(@PathVariable Integer id) {
         return groupActivitiesService.getById(id);
+    }
+
+    @ApiOperation("状态列表")
+    @GetMapping("statusList")
+    public List<String> statusList() {
+        return groupActivitiesService.statusList();
     }
 }
