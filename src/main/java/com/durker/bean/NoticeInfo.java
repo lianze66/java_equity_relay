@@ -27,9 +27,6 @@ public class NoticeInfo {
     @ApiModelProperty("类型ID")
     private Integer typeId;
 
-    @ApiModelProperty("简短说明")
-    private String shortDesc;
-
     @ApiModelProperty("内容")
     private String content;
 
