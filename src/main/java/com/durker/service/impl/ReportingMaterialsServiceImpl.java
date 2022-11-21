@@ -1,5 +1,6 @@
 package com.durker.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.durker.bean.FileInfo;
@@ -11,6 +12,7 @@ import com.durker.service.IReportingMaterialsFileService;
 import com.durker.service.IReportingMaterialsService;
 import com.durker.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,6 +28,9 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
 
     @Autowired
     private ISysUserService sysUserService;
+
+    @Value("${file.server}")
+    private String fileServer;
 
     @Override
     public boolean save(ReportingMaterials reportingMaterials) {
@@ -98,17 +103,43 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     }
 
     @Override
+    public List<ReportingMaterials> list() {
+        List<ReportingMaterials> list = super.list();
+        return adapterList(list);
+    }
+
+    @Override
     public List<ReportingMaterials> checkList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
         query.eq("status", "申请公开");
-        return baseMapper.selectList(query);
+        List<ReportingMaterials> list = baseMapper.selectList(query);
+        return adapterList(list);
     }
 
     @Override
     public List<ReportingMaterials> showList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
         query.eq("status", "审核通过");
-        return baseMapper.selectList(query);
+        List<ReportingMaterials> list = baseMapper.selectList(query);
+        return adapterList(list);
+    }
+
+    private List<ReportingMaterials> adapterList(List<ReportingMaterials> list) {
+        for (ReportingMaterials reportingMaterials : list) {
+
+            QueryWrapper<FileInfo> fileQuery = new QueryWrapper<>();
+            fileQuery.eq("reporting_materials_id", reportingMaterials.getId());
+            List<FileInfo> fileInfoList = fileInfoService.list(fileQuery);
+
+            List<String> filePathList = new ArrayList<>();
+            if (fileInfoList != null && !fileInfoList.isEmpty()) {
+                for (FileInfo fileInfo : fileInfoList) {
+                    filePathList.add(fileServer + fileInfo.getPath());
+                }
+            }
+            reportingMaterials.setFilePathList(filePathList);
+        }
+        return list;
     }
 
     @Override
