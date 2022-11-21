@@ -127,14 +127,14 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     private List<ReportingMaterials> adapterList(List<ReportingMaterials> list) {
         for (ReportingMaterials reportingMaterials : list) {
 
-            QueryWrapper<FileInfo> fileQuery = new QueryWrapper<>();
+            QueryWrapper<ReportingMaterialsFile> fileQuery = new QueryWrapper<>();
             fileQuery.eq("reporting_materials_id", reportingMaterials.getId());
-            List<FileInfo> fileInfoList = fileInfoService.list(fileQuery);
+            List<ReportingMaterialsFile> reportingMaterialsFileList = reportingMaterialsFileService.list(fileQuery);
 
             List<String> filePathList = new ArrayList<>();
-            if (fileInfoList != null && !fileInfoList.isEmpty()) {
-                for (FileInfo fileInfo : fileInfoList) {
-                    filePathList.add(fileServer + fileInfo.getPath());
+            if (reportingMaterialsFileList != null && !reportingMaterialsFileList.isEmpty()) {
+                for (ReportingMaterialsFile reportingMaterialsFile : reportingMaterialsFileList) {
+                    filePathList.add(fileServer + fileInfoService.getById(reportingMaterialsFile.getFileInfoId()).getPath());
                 }
             }
             reportingMaterials.setFilePathList(filePathList);
