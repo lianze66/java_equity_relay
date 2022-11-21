@@ -13,11 +13,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
+
+    @Override
+    public List<SysUser> list() {
+        return baseMapper.queryList();
+    }
 
     @Override
     public Map<String, String> login(String loginName, String password) {
