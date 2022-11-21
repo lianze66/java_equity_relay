@@ -104,7 +104,9 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
 
     @Override
     public List<ReportingMaterials> list() {
-        List<ReportingMaterials> list = super.list();
+        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
+        query.orderByDesc("update_time");
+        List<ReportingMaterials> list = baseMapper.selectList(query);
         return adapterList(list);
     }
 
@@ -112,6 +114,7 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     public List<ReportingMaterials> checkList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
         query.eq("status", "申请公开");
+        query.orderByDesc("update_time");
         List<ReportingMaterials> list = baseMapper.selectList(query);
         return adapterList(list);
     }
@@ -120,6 +123,7 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     public List<ReportingMaterials> showList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
         query.eq("status", "审核通过");
+        query.orderByDesc("update_time");
         List<ReportingMaterials> list = baseMapper.selectList(query);
         return adapterList(list);
     }
