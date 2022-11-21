@@ -23,4 +23,9 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
             return false;
         }
     }
+
+    @Override
+    public int joinCount(Integer groupActivitiesId) {
+        return baseMapper.joinCount(groupActivitiesId);
+    }
 }

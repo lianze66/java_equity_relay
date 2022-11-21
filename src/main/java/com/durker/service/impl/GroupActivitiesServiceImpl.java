@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.durker.bean.GroupActivities;
 import com.durker.mapper.GroupActivitiesMapper;
+import com.durker.service.IGroupActivitiesJoinService;
 import com.durker.service.IGroupActivitiesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +18,36 @@ import java.util.Map;
 @Service
 public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMapper, GroupActivities> implements IGroupActivitiesService {
 
+    @Autowired
+    private IGroupActivitiesJoinService groupActivitiesJoinService;
+
     @Override
     public List<GroupActivities> activeList() {
         QueryWrapper<GroupActivities> query = new QueryWrapper<>();
         query.eq(GroupActivities.column.STATUS.name().toLowerCase(), "进行中"); // 未开始、进行中、已取消、已结束
         query.orderByAsc(GroupActivities.column.MEETING_TIME.name().toLowerCase());
-        return baseMapper.selectList(query);
+
+        List<GroupActivities> list = baseMapper.selectList(query);
+        return listAdapter(list);
+    }
+
+    @Override
+    public List<GroupActivities> list() {
+        return listAdapter(super.list());
+    }
+
+    @Override
+    public GroupActivities getById(Serializable id) {
+        GroupActivities groupActivities = super.getById(id);
+        groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
+        return groupActivities;
+    }
+
+    private List<GroupActivities> listAdapter(List<GroupActivities> list) {
+        for (GroupActivities groupActivities: list) {
+            groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
+        }
+        return list;
     }
 
     @Override
