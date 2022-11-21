@@ -41,6 +41,9 @@ public class SysUser {
     @ApiModelProperty("年龄")
     private Integer age;
 
+    @ApiModelProperty("购房套数")
+    private Integer houseCount;
+
     @ApiModelProperty("合同编号")
     private String contractNo;
 
