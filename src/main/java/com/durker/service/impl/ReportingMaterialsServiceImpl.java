@@ -95,6 +95,13 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     }
 
     @Override
+    public List<ReportingMaterials> checkList() {
+        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
+        query.eq("status", "申请公开");
+        return baseMapper.selectList(query);
+    }
+
+    @Override
     public List<ReportingMaterials> showList() {
         QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
         query.eq("status", "审核通过");

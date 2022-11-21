@@ -24,6 +24,12 @@ public class ReportingMaterialsController {
         return reportingMaterialsService.list();
     }
 
+    @ApiOperation("待审核列表")
+    @GetMapping("checkList")
+    public List<ReportingMaterials> checkList() {
+        return reportingMaterialsService.checkList();
+    }
+
     @ApiOperation("审核通过列表")
     @GetMapping("showList")
     public List<ReportingMaterials> showList() {

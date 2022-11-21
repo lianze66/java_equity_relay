@@ -15,7 +15,14 @@ public interface IReportingMaterialsService extends IService<ReportingMaterials>
     List<Map<String, String>> statusList();
 
     /**
-     * 公共资源库列表
+     * 待审核列表
+     *
+     * @return
+     */
+    List<ReportingMaterials> checkList();
+
+    /**
+     * 审核公开列表
      * @return
      */
     List<ReportingMaterials> showList();
@@ -25,4 +32,6 @@ public interface IReportingMaterialsService extends IService<ReportingMaterials>
      * @return
      */
     List<ReportingMaterials> ownList(String token);
+
+
 }
