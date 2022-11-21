@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.durker.bean.GroupActivities;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IGroupActivitiesService extends IService<GroupActivities> {
 
@@ -19,6 +20,6 @@ public interface IGroupActivitiesService extends IService<GroupActivities> {
      *
      * @return
      */
-    List<String> statusList();
+    List<Map<String, String>> statusList();
 
 }

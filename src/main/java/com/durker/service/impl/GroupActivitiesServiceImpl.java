@@ -8,7 +8,9 @@ import com.durker.service.IGroupActivitiesService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMapper, GroupActivities> implements IGroupActivitiesService {
@@ -22,12 +24,29 @@ public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMappe
     }
 
     @Override
-    public List<String> statusList() {
-        List<String> list = new ArrayList<>();
-        list.add("未开始");
-        list.add("进行中");
-        list.add("已取消");
-        list.add("已结束");
+    public List<Map<String, String>> statusList() {
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("id", "1");
+        map1.put("name", "未开始");
+
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("id", "2");
+        map2.put("name", "进行中");
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.put("id", "3");
+        map3.put("name", "已取消");
+
+        Map<String, String> map4 = new HashMap<>();
+        map4.put("id", "4");
+        map4.put("name", "已结束");
+
+        list.add(map1);
+        list.add(map2);
+        list.add(map3);
+        list.add(map4);
+
         return list;
     }
 }
