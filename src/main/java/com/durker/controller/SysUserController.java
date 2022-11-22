@@ -35,14 +35,14 @@ public class SysUserController {
     }
 
     @ApiOperation("删除")
-    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "用户主键", dataTypeClass = Integer.class))
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable Integer id) {
         return sysUserService.removeById(id);
     }
 
     @ApiOperation("详情")
-    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "用户主键", dataTypeClass = Integer.class))
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
     public SysUser detail(@PathVariable Integer id) {
         return sysUserService.getById(id);
