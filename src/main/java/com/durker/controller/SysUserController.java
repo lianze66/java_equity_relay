@@ -28,7 +28,6 @@ public class SysUserController {
     }
 
     @ApiOperation("更新")
-    @ApiImplicitParams(@ApiImplicitParam(name = "sysUser", value = "对象", dataTypeClass = SysUser.class))
     @PutMapping("update")
     public boolean update(@RequestBody SysUser sysUser) {
         return sysUserService.updateById(sysUser);

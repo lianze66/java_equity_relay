@@ -1,6 +1,5 @@
 package com.durker.controller;
 
-import com.durker.bean.GroupActivities;
 import com.durker.bean.ReportingMaterials;
 import com.durker.service.IReportingMaterialsService;
 import io.swagger.annotations.Api;
@@ -47,14 +46,12 @@ public class ReportingMaterialsController {
     }
 
     @ApiOperation("保存")
-    @ApiImplicitParams(@ApiImplicitParam(name = "reportingMaterials", value = "对象", dataTypeClass = ReportingMaterials.class))
     @PostMapping("insert")
     public boolean insert(@RequestBody ReportingMaterials reportingMaterials) {
         return reportingMaterialsService.save(reportingMaterials);
     }
 
     @ApiOperation("更新")
-    @ApiImplicitParams(@ApiImplicitParam(name = "reportingMaterials", value = "对象", dataTypeClass = ReportingMaterials.class))
     @PutMapping("update")
     public boolean update(@RequestBody ReportingMaterials reportingMaterials) {
         return reportingMaterialsService.updateById(reportingMaterials);

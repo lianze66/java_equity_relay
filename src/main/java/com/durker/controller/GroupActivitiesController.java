@@ -38,21 +38,18 @@ public class GroupActivitiesController {
     }
 
     @ApiOperation("保存")
-    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivities", value = "对象", dataTypeClass = GroupActivities.class))
     @PostMapping("insert")
     public boolean insert(@RequestBody GroupActivities groupActivities) {
         return groupActivitiesService.save(groupActivities);
     }
 
     @ApiOperation("更新")
-    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivities", value = "对象", dataTypeClass = GroupActivities.class))
     @PutMapping("update")
     public boolean update(@RequestBody GroupActivities groupActivities) {
         return groupActivitiesService.updateById(groupActivities);
     }
 
     @ApiOperation("报名")
-    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivitiesJoin", value = "对象", dataTypeClass = GroupActivitiesJoin.class))
     @PutMapping("signUp")
     public boolean signUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
         return groupActivitiesJoinService.signUp(groupActivitiesJoin);
