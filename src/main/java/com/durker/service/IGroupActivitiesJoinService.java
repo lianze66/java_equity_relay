@@ -9,12 +9,19 @@ import java.util.List;
 public interface IGroupActivitiesJoinService extends IService<GroupActivitiesJoin> {
 
     /**
-     * 登记
+     * 报名
      *
      * @param groupActivitiesJoin
      * @return
      */
     boolean signUp(GroupActivitiesJoin groupActivitiesJoin);
+
+    /**
+     * 消息报名
+     * @param groupActivitiesJoin
+     * @return
+     */
+    boolean noSignUp(GroupActivitiesJoin groupActivitiesJoin);
 
     /**
      * 参加聚集人员及人数集合
@@ -30,5 +37,4 @@ public interface IGroupActivitiesJoinService extends IService<GroupActivitiesJoi
      * @return
      */
     int joinCount(Integer groupActivitiesId);
-
 }

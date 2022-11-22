@@ -31,6 +31,20 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
     }
 
     @Override
+    public boolean noSignUp(GroupActivitiesJoin groupActivitiesJoin) {
+        QueryWrapper<GroupActivitiesJoin> query = new QueryWrapper<>();
+        query.eq("group_activities_id", groupActivitiesJoin.getGroupActivitiesId());
+        query.eq("sys_user_id", groupActivitiesJoin.getSysUserId());
+        GroupActivitiesJoin join = baseMapper.selectOne(query);
+        if (join != null) {
+            baseMapper.deleteById(join.getId());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public List<JoinUserAndCount> joinUserList(Integer groupActivitiesId) {
         return baseMapper.joinUserList(groupActivitiesId);
     }

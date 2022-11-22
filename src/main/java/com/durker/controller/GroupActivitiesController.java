@@ -55,6 +55,13 @@ public class GroupActivitiesController {
         return groupActivitiesJoinService.signUp(groupActivitiesJoin);
     }
 
+
+    @ApiOperation("取消报名")
+    @PutMapping("noSignUp")
+    public boolean noSignUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
+        return groupActivitiesJoinService.noSignUp(groupActivitiesJoin);
+    }
+
     @ApiOperation("详情")
     @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
