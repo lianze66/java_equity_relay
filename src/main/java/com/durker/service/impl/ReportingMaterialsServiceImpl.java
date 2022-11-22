@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Service
@@ -42,14 +43,19 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     }
 
     @Override
+    public ReportingMaterials getById(Serializable id) {
+        ReportingMaterials reportingMaterials = super.getById(id);
+        materialsAndFileShip(reportingMaterials);
+        return reportingMaterials;
+    }
+
+    @Override
     public boolean updateById(ReportingMaterials reportingMaterials) {
         // 删除关系表里的数据
         QueryWrapper<ReportingMaterialsFile> query = new QueryWrapper<>();
         query.eq("reporting_materials_id", reportingMaterials.getId());
         reportingMaterialsFileService.remove(query);
-
         materialsAndFileShip(reportingMaterials);
-
         return super.updateById(reportingMaterials);
     }
 
@@ -128,6 +134,14 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
         return adapterList(list);
     }
 
+    @Override
+    public List<ReportingMaterials> ownList(String token) {
+        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
+        query.eq("sys_user_id", sysUserService.getUserInfo(token).getId());
+        List<ReportingMaterials> list = baseMapper.selectList(query);
+        return adapterList(list);
+    }
+
     private List<ReportingMaterials> adapterList(List<ReportingMaterials> list) {
         for (ReportingMaterials reportingMaterials : list) {
 
@@ -144,12 +158,5 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
             reportingMaterials.setFilePathList(filePathList);
         }
         return list;
-    }
-
-    @Override
-    public List<ReportingMaterials> ownList(String token) {
-        QueryWrapper<ReportingMaterials> query = new QueryWrapper<>();
-        query.eq("sys_user_id", sysUserService.getUserInfo(token).getId());
-        return baseMapper.selectList(query);
     }
 }
