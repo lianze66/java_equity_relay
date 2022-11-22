@@ -45,7 +45,19 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     @Override
     public ReportingMaterials getById(Serializable id) {
         ReportingMaterials reportingMaterials = super.getById(id);
-        materialsAndFileShip(reportingMaterials);
+
+        QueryWrapper<ReportingMaterialsFile> fileQuery = new QueryWrapper<>();
+        fileQuery.eq("reporting_materials_id", id);
+        List<ReportingMaterialsFile> reportingMaterialsFileList = reportingMaterialsFileService.list(fileQuery);
+
+        List<String> filePathList = new ArrayList<>();
+        if (reportingMaterialsFileList != null && !reportingMaterialsFileList.isEmpty()) {
+            for (ReportingMaterialsFile reportingMaterialsFile : reportingMaterialsFileList) {
+                filePathList.add(fileServer + fileInfoService.getById(reportingMaterialsFile.getFileInfoId()).getPath());
+            }
+        }
+        reportingMaterials.setFilePathList(filePathList);
+
         return reportingMaterials;
     }
 
