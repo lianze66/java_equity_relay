@@ -1,4 +1,6 @@
 ${AnsiColor.BLUE}
-守护双泉权益接龙系统
-Spring Boot version: ${spring-boot.version} ${spring-boot.formatted-version}
+================================================
+= 双泉嘉苑守护权益接龙系统                         =
+= Spring Boot version: ${spring-boot.version} ${spring-boot.formatted-version}         =
+================================================
 ${AnsiColor.DEFAULT}
