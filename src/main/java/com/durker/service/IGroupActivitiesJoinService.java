@@ -9,7 +9,7 @@ import java.util.List;
 public interface IGroupActivitiesJoinService extends IService<GroupActivitiesJoin> {
 
     /**
-     * 报名
+     * 我要报名
      *
      * @param groupActivitiesJoin
      * @return
@@ -17,7 +17,7 @@ public interface IGroupActivitiesJoinService extends IService<GroupActivitiesJoi
     boolean signUp(GroupActivitiesJoin groupActivitiesJoin);
 
     /**
-     * 消息报名
+     * 取消报名
      * @param groupActivitiesJoin
      * @return
      */

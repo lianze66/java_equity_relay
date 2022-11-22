@@ -49,7 +49,7 @@ public class GroupActivitiesController {
         return groupActivitiesService.updateById(groupActivities);
     }
 
-    @ApiOperation("报名")
+    @ApiOperation("我要报名")
     @PutMapping("signUp")
     public boolean signUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
         return groupActivitiesJoinService.signUp(groupActivitiesJoin);
