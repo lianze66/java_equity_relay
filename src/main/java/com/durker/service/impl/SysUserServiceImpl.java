@@ -6,12 +6,16 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.durker.bean.Salesman;
 import com.durker.bean.SysUser;
 import com.durker.mapper.SysUserMapper;
+import com.durker.service.ISalesmanService;
 import com.durker.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +24,23 @@ import java.util.Map;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
+    @Autowired
+    private ISalesmanService salesmanService;
+
     @Override
     public List<SysUser> list() {
-        return baseMapper.queryList();
+        List<SysUser> list = baseMapper.queryList();
+        for (SysUser sysUser : list) {
+            sysUser.setSalesmanName(salesmanService.getById(sysUser.getSalesmanId()).getName());
+        }
+        return list;
+    }
+
+    @Override
+    public SysUser getById(Serializable id) {
+        SysUser sysUser = super.getById(id);
+        sysUser.setSalesmanName(salesmanService.getById(sysUser.getSalesmanId()).getName());
+        return sysUser;
     }
 
     @Override
@@ -60,6 +78,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
             if (id != null) {
                 sysUser = baseMapper.selectById(id);
+
+                Salesman salesman = salesmanService.getById(sysUser.getSalesmanId());
+                if (salesman != null) {
+                    sysUser.setSalesmanName(salesman.getName());
+                }
 
                 if (sysUser != null) {
                     JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(sysUser.getPassword())).build();
