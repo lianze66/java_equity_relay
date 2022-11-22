@@ -45,6 +45,7 @@ public class NoticeInfoController {
     }
 
     @ApiOperation("详情")
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
     public NoticeInfo detail(@PathVariable Integer id) {
         return noticeInfoService.getById(id);

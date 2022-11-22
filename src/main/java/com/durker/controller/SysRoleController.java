@@ -3,6 +3,8 @@ package com.durker.controller;
 import com.durker.bean.SysRole;
 import com.durker.service.ISysRoleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ public class SysRoleController {
     }
 
     @ApiOperation("详情")
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
     public SysRole detail(@PathVariable Integer id) {
         return sysRoleService.getById(id);

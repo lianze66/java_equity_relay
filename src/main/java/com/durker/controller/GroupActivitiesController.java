@@ -5,6 +5,8 @@ import com.durker.bean.GroupActivitiesJoin;
 import com.durker.service.IGroupActivitiesJoinService;
 import com.durker.service.IGroupActivitiesService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,24 +38,28 @@ public class GroupActivitiesController {
     }
 
     @ApiOperation("保存")
+    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivities", value = "对象", dataTypeClass = GroupActivities.class))
     @PostMapping("insert")
     public boolean insert(@RequestBody GroupActivities groupActivities) {
         return groupActivitiesService.save(groupActivities);
     }
 
     @ApiOperation("更新")
+    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivities", value = "对象", dataTypeClass = GroupActivities.class))
     @PutMapping("update")
     public boolean update(@RequestBody GroupActivities groupActivities) {
         return groupActivitiesService.updateById(groupActivities);
     }
 
     @ApiOperation("报名")
+    @ApiImplicitParams(@ApiImplicitParam(name = "groupActivitiesJoin", value = "对象", dataTypeClass = GroupActivitiesJoin.class))
     @PutMapping("signUp")
     public boolean signUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
         return groupActivitiesJoinService.signUp(groupActivitiesJoin);
     }
 
     @ApiOperation("详情")
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
     public GroupActivities detail(@PathVariable Integer id) {
         return groupActivitiesService.getById(id);

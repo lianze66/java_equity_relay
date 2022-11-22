@@ -1,8 +1,11 @@
 package com.durker.controller;
 
+import com.durker.bean.GroupActivities;
 import com.durker.bean.ReportingMaterials;
 import com.durker.service.IReportingMaterialsService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,24 +40,28 @@ public class ReportingMaterialsController {
     }
 
     @ApiOperation("个人列表")
+    @ApiImplicitParams(@ApiImplicitParam(name = "token", value = "Token值", dataTypeClass = String.class))
     @GetMapping("ownList/{token}")
     public List<ReportingMaterials> ownList(@PathVariable String token) {
         return reportingMaterialsService.ownList(token);
     }
 
     @ApiOperation("保存")
+    @ApiImplicitParams(@ApiImplicitParam(name = "reportingMaterials", value = "对象", dataTypeClass = ReportingMaterials.class))
     @PostMapping("insert")
     public boolean insert(@RequestBody ReportingMaterials reportingMaterials) {
         return reportingMaterialsService.save(reportingMaterials);
     }
 
     @ApiOperation("更新")
+    @ApiImplicitParams(@ApiImplicitParam(name = "reportingMaterials", value = "对象", dataTypeClass = ReportingMaterials.class))
     @PutMapping("update")
     public boolean update(@RequestBody ReportingMaterials reportingMaterials) {
         return reportingMaterialsService.updateById(reportingMaterials);
     }
 
     @ApiOperation("详情")
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
     public ReportingMaterials detail(@PathVariable Integer id) {
         return reportingMaterialsService.getById(id);
