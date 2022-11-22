@@ -57,6 +57,13 @@ public class ReportingMaterialsController {
         return reportingMaterialsService.updateById(reportingMaterials);
     }
 
+    @ApiOperation("删除")
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return reportingMaterialsService.removeById(id);
+    }
+
     @ApiOperation("详情")
     @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @GetMapping("{id}")
