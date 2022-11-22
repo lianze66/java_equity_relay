@@ -19,6 +19,9 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
         if (join == null) {
             baseMapper.insert(groupActivitiesJoin);
             return true;
+        } else if (join.getPersonCount().intValue() != groupActivitiesJoin.getPersonCount().intValue()) {
+            baseMapper.updateById(groupActivitiesJoin);
+            return true;
         } else {
             return false;
         }
