@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.durker.bean.GroupActivitiesJoin;
 import com.durker.mapper.GroupActivitiesJoinMapper;
 import com.durker.service.IGroupActivitiesJoinService;
+import com.durker.vo.JoinUserAndCount;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJoinMapper, GroupActivitiesJoin> implements IGroupActivitiesJoinService {
@@ -25,6 +28,11 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<JoinUserAndCount> joinUserList(Integer groupActivitiesId) {
+        return baseMapper.joinUserList(groupActivitiesId);
     }
 
     @Override

@@ -39,12 +39,14 @@ public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMappe
     @Override
     public GroupActivities getById(Serializable id) {
         GroupActivities groupActivities = super.getById(id);
+        groupActivities.setJoinUserAndCountList(groupActivitiesJoinService.joinUserList(groupActivities.getId()));
         groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
         return groupActivities;
     }
 
     private List<GroupActivities> listAdapter(List<GroupActivities> list) {
         for (GroupActivities groupActivities: list) {
+            groupActivities.setJoinUserAndCountList(groupActivitiesJoinService.joinUserList(groupActivities.getId()));
             groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
         }
         return list;

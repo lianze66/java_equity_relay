@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.durker.vo.JoinUserAndCount;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ApiModel("群体活动模型")
@@ -54,6 +56,11 @@ public class GroupActivities {
     private Date updateTime;
 
     @TableField(exist = false)
-    @ApiModelProperty("参于人数")
+    @ApiModelProperty("参加聚集总人数")
     private int joinCount;
+
+    @TableField(exist = false)
+    @ApiModelProperty("参加聚集人员及人数集合")
+    private List<JoinUserAndCount> joinUserAndCountList;
+
 }
