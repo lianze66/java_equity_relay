@@ -54,7 +54,7 @@ public class DruidConfig {
      */
     @Bean
     public FilterRegistrationBean webStatFilter() {
-        Map<String, String> initParams = new HashMap<String, String>();
+        Map<String, String> initParams = new HashMap<>();
         initParams.put("exclusions", "*.js,*.css,/druid/*");
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
