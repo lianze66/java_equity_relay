@@ -20,7 +20,7 @@ public class FileProcessingController {
     @ApiOperation(value = "上传", notes = "文件上传接口，单个文件最大支持100MB。")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "文件对象", dataTypeClass = MultipartFile.class),
-            @ApiImplicitParam(name = "folder", value = "文件夹", dataTypeClass = String.class)
+            @ApiImplicitParam(name = "folder", value = "父文件夹", dataTypeClass = String.class)
     })
     @RequestMapping(value = "uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestPart(value = "file") MultipartFile file, @RequestParam String folder) throws Exception {
