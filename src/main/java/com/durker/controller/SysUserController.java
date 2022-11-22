@@ -34,7 +34,7 @@ public class SysUserController {
     }
 
     @ApiOperation("删除")
-    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "用户主键"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "用户主键", dataTypeClass = Integer.class))
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable Integer id) {
         return sysUserService.removeById(id);
@@ -48,8 +48,8 @@ public class SysUserController {
 
     @ApiOperation("登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginName", value = "用户名"),
-            @ApiImplicitParam(name = "password", value = "密码")
+            @ApiImplicitParam(name = "loginName", value = "用户名", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
     })
     @PostMapping("login")
     public Map<String, String> login(@RequestParam String loginName, @RequestParam String password) {

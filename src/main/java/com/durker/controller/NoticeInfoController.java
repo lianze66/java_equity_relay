@@ -38,7 +38,7 @@ public class NoticeInfoController {
     }
 
     @ApiOperation("删除")
-    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键"))
+    @ApiImplicitParams(@ApiImplicitParam(name = "id", value = "主键", dataTypeClass = Integer.class))
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable Integer id) {
         return noticeInfoService.removeById(id);
