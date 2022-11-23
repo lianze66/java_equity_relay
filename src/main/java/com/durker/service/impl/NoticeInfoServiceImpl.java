@@ -16,7 +16,7 @@ public class NoticeInfoServiceImpl extends ServiceImpl<NoticeInfoMapper, NoticeI
     @Override
     public List<NoticeInfo> list() {
         QueryWrapper<NoticeInfo> query = new QueryWrapper<>();
-        query.orderByDesc("update_time");
+        query.orderByDesc("create_time");
         return baseMapper.selectList(query);
     }
 }

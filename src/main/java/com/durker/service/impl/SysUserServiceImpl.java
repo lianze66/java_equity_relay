@@ -39,7 +39,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public SysUser getById(Serializable id) {
         SysUser sysUser = super.getById(id);
-        sysUser.setSalesmanName(salesmanService.getById(sysUser.getSalesmanId()).getName());
+        sysUser.setSalesmanName(salesmanService.getById(sysUser.getSalesmanId()).getName()); // 指定销售人员
         return sysUser;
     }
 
@@ -96,5 +96,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
 
         return sysUser;
+    }
+
+    @Override
+    public boolean updatePassword(String loginName, String oldPassword, String newPassword) {
+        boolean result = false;
+
+        QueryWrapper<SysUser> query = new QueryWrapper<>();
+        query.eq("login_name", loginName);
+        SysUser sysUser = baseMapper.selectOne(query);
+
+        if (sysUser != null) {
+            if (sysUser.getPassword().equals(oldPassword)) {
+                sysUser.setPassword(newPassword);
+                baseMapper.updateById(sysUser);
+                result = true;
+            }
+        }
+
+        return result;
     }
 }

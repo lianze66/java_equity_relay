@@ -49,12 +49,23 @@ public class SysUserController {
 
     @ApiOperation("登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginName", value = "用户名", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "loginName", value = "登录名称", dataTypeClass = String.class),
             @ApiImplicitParam(name = "password", value = "密码", dataTypeClass = String.class)
     })
     @PostMapping("login")
     public Map<String, String> login(@RequestParam String loginName, @RequestParam String password) {
         return sysUserService.login(loginName, password);
+    }
+
+    @ApiOperation("修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "loginName", value = "登录名称", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "oldPassword", value = "原密码", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "newPassword", value = "新密码", dataTypeClass = String.class)
+    })
+    @PostMapping("updatePassword")
+    public boolean updatePassword(@RequestParam String loginName, @RequestParam String oldPassword, @RequestParam String newPassword) {
+        return sysUserService.updatePassword(loginName, oldPassword, newPassword);
     }
 
     @ApiOperation("返回用户信息")
