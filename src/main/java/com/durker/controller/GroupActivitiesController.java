@@ -57,9 +57,9 @@ public class GroupActivitiesController {
 
 
     @ApiOperation("取消报名")
-    @PutMapping("noSignUp")
-    public boolean noSignUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
-        return groupActivitiesJoinService.noSignUp(groupActivitiesJoin);
+    @PutMapping("cancelSignUp")
+    public boolean cancelSignUp(@RequestBody GroupActivitiesJoin groupActivitiesJoin) {
+        return groupActivitiesJoinService.cancelSignUp(groupActivitiesJoin);
     }
 
     @ApiOperation("详情")

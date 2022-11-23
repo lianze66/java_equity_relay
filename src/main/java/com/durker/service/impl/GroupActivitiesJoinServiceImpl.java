@@ -22,16 +22,18 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
         if (join == null) {
             baseMapper.insert(groupActivitiesJoin);
             return true;
-        } else if (join.getPersonCount().intValue() != groupActivitiesJoin.getPersonCount().intValue()) {
-            baseMapper.updateById(groupActivitiesJoin);
-            return true;
         } else {
+            if (!join.getPersonCount().equals(groupActivitiesJoin.getPersonCount())) {
+                join.setPersonCount(groupActivitiesJoin.getPersonCount());
+                baseMapper.updateById(join);
+                return true;
+            }
             return false;
         }
     }
 
     @Override
-    public boolean noSignUp(GroupActivitiesJoin groupActivitiesJoin) {
+    public boolean cancelSignUp(GroupActivitiesJoin groupActivitiesJoin) {
         QueryWrapper<GroupActivitiesJoin> query = new QueryWrapper<>();
         query.eq("group_activities_id", groupActivitiesJoin.getGroupActivitiesId());
         query.eq("sys_user_id", groupActivitiesJoin.getSysUserId());

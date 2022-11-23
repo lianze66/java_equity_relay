@@ -21,7 +21,7 @@ public interface IGroupActivitiesJoinService extends IService<GroupActivitiesJoi
      * @param groupActivitiesJoin
      * @return
      */
-    boolean noSignUp(GroupActivitiesJoin groupActivitiesJoin);
+    boolean cancelSignUp(GroupActivitiesJoin groupActivitiesJoin);
 
     /**
      * 参加聚集人员及人数集合
