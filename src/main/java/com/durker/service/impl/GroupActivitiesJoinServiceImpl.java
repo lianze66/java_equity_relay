@@ -8,6 +8,7 @@ import com.durker.service.IGroupActivitiesJoinService;
 import com.durker.vo.JoinUserAndCount;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,11 +21,14 @@ public class GroupActivitiesJoinServiceImpl extends ServiceImpl<GroupActivitiesJ
         query.eq("sys_user_id", groupActivitiesJoin.getSysUserId());
         GroupActivitiesJoin join = baseMapper.selectOne(query);
         if (join == null) {
+            groupActivitiesJoin.setCreateTime(new Date());
+            groupActivitiesJoin.setUpdateTime(new Date());
             baseMapper.insert(groupActivitiesJoin);
             return true;
         } else {
             if (!join.getPersonCount().equals(groupActivitiesJoin.getPersonCount())) {
                 join.setPersonCount(groupActivitiesJoin.getPersonCount());
+                join.setUpdateTime(new Date());
                 baseMapper.updateById(join);
                 return true;
             }
