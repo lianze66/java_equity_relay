@@ -19,7 +19,7 @@ public class GroupActivitiesJoin {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("群体活动表ID")
+    @ApiModelProperty("群体活动ID")
     private Integer groupActivitiesId;
 
     @ApiModelProperty("系统用户ID")
