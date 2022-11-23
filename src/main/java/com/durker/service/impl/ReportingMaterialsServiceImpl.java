@@ -14,6 +14,7 @@ import com.durker.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.*;
@@ -33,6 +34,7 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
     @Value("${file.server}")
     private String fileServer;
 
+    @Transactional
     @Override
     public boolean save(ReportingMaterials reportingMaterials) {
         boolean save = super.save(reportingMaterials);
@@ -61,6 +63,7 @@ public class ReportingMaterialsServiceImpl extends ServiceImpl<ReportingMaterial
         return reportingMaterials;
     }
 
+    @Transactional
     @Override
     public boolean updateById(ReportingMaterials reportingMaterials) {
         // 删除关系表里的数据
