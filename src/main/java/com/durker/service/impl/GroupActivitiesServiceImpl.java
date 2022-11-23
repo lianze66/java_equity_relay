@@ -22,26 +22,20 @@ public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMappe
     private IGroupActivitiesJoinService groupActivitiesJoinService;
 
     @Override
-    public List<GroupActivities> activeList() {
+    public List<GroupActivities> list() {
         QueryWrapper<GroupActivities> query = new QueryWrapper<>();
-        query.eq(GroupActivities.column.STATUS.name().toLowerCase(), "进行中"); // 未开始、进行中、已取消、已结束
-        query.orderByAsc(GroupActivities.column.MEETING_TIME.name().toLowerCase());
-
+        query.orderByAsc("update_time");
         List<GroupActivities> list = baseMapper.selectList(query);
         return listAdapter(list);
     }
 
     @Override
-    public List<GroupActivities> list() {
-        return listAdapter(super.list());
-    }
-
-    @Override
-    public GroupActivities getById(Serializable id) {
-        GroupActivities groupActivities = super.getById(id);
-        groupActivities.setJoinUserAndCountList(groupActivitiesJoinService.joinUserList(groupActivities.getId()));
-        groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
-        return groupActivities;
+    public List<GroupActivities> activeList() {
+        QueryWrapper<GroupActivities> query = new QueryWrapper<>();
+        query.eq(GroupActivities.column.STATUS.name().toLowerCase(), "进行中"); // 未开始、进行中、已取消、已结束
+        query.orderByAsc(GroupActivities.column.MEETING_TIME.name().toLowerCase());
+        List<GroupActivities> list = baseMapper.selectList(query);
+        return listAdapter(list);
     }
 
     private List<GroupActivities> listAdapter(List<GroupActivities> list) {
@@ -50,6 +44,14 @@ public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMappe
             groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
         }
         return list;
+    }
+
+    @Override
+    public GroupActivities getById(Serializable id) {
+        GroupActivities groupActivities = super.getById(id);
+        groupActivities.setJoinUserAndCountList(groupActivitiesJoinService.joinUserList(groupActivities.getId()));
+        groupActivities.setJoinCount(groupActivitiesJoinService.joinCount(groupActivities.getId()));
+        return groupActivities;
     }
 
     @Override
