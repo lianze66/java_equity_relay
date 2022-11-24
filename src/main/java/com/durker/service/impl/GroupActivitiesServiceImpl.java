@@ -24,7 +24,7 @@ public class GroupActivitiesServiceImpl extends ServiceImpl<GroupActivitiesMappe
     @Override
     public List<GroupActivities> list() {
         QueryWrapper<GroupActivities> query = new QueryWrapper<>();
-        query.orderByAsc("update_time");
+        query.orderByAsc("create_time");
         List<GroupActivities> list = baseMapper.selectList(query);
         return listAdapter(list);
     }
