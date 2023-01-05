@@ -7,7 +7,7 @@
     <artifactId>java_equity_relay</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>java_equity_relay</name>
-    <description>java_equity_relay</description>
+    <description>双泉嘉苑维权系统。</description>
     <packaging>jar</packaging>
 
     <properties>
